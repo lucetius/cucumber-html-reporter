@@ -133,12 +133,16 @@ this.Then(/^<%= step.name.replace(/"[^"]*"/g, '"\(\[\^\"\]\*\)"') %>$/, function
                            </div>
                       <% } %>
 
-                       <% if (step.image) { %>
-                                                <a class="toggle" href="#">Screenshot -</a>
-                                                <a class="screenshot" href="<%= step.image %>">
-                                                 <img class="screenshot" style="height:100%;width:100%" id="my_images" src="<%= step.image %>"/>
-                                                 </a>
-                       <% } %>
+                        <% if (step.images) { %>
+                            <a class="toggle" href="#">Screenshot -</a>
+                            <% _.each(step.images, function(image, imageIndex) { %>
+                            <br />
+                            <a class="screenshot" href="<%= image.data %>">
+                                <%= image.browserName %>
+                                <img class="screenshot" style="height:100%;width:100%" id="my_images_<%= imageIndex %>" src="<%= image.data %>"/>
+                            </a>
+                            <% }) %>
+                        <% } %>
 
                     <% } %>
                     </p>
